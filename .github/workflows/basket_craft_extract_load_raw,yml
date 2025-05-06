@@ -1,0 +1,44 @@
+name: Run Basket Craft Extract and Load to Raw
+#name roles and when to run, also where it runs
+on:
+    schedule:
+    #cron is everywhere, easier for ppl to understand how to schedule things
+      - cron: '*/15 `* * * *'
+      # every 15 minutes
+    workflow_dispatch: #optional manual trigger
+
+#Define environmental variables --> everytime it runs, it will check out repository, but can't see ENV since it's not in public repository
+env:
+  MYSQL_USER: ${{ secrets.MYSQL_USER }} #allows to get user info from secrets manager
+
+jobs:
+  extract-load:
+    name: Extract and Load Raw Basket Craft Data to a Raw Schema
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3 
+        #checks out the code in the repository so it can be used in the workflow
+        #first, it needs to download Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11' #specify the version of Python to use
+
+      #now have to install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt #install the dependencies listed in the requirements.txt file
+        #NOW run script
+
+      - name: Extract and load products to raw Schema
+        run: |
+          python elt/basket_craft_products_extract_load.py
+
+      - name: Extract and load orders to raw Schema
+        run: |
+          python elt/basket_craft_orders_extract_load.py
+          
+      #continue

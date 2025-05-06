@@ -1,0 +1,38 @@
+# This file is made so it can be used as a source in the dbt_basket_craft project.
+# It is used to define the source tables and their columns.
+# In quiz, Prof will ask us to define a data pipeline for this source. 
+#Have to define it here too.
+#He will look for it in our __sources.yml file. Otherwise, it won't work, 
+version: 2
+
+sources:
+- name: basket_craft
+  database: basket_craft
+  schema: raw
+  tables:
+    - name: products
+      columns:
+        - name: product_id
+          description: Primary key for products
+          tests:
+            - unique
+            - not_null
+        - name: created_at
+        - name: description
+        - name: product_name
+
+    - name: orders
+      columns:
+      - name: order_id
+        description: Primary key for orders
+        tests:
+         - unique
+         - not_null
+      - name: created_at
+      - name: cogs_usd
+      - name: items_purchased
+      - name: price_usd
+      - name: primary_product_id
+      - name: user_id
+      - name: website_session_id
+
