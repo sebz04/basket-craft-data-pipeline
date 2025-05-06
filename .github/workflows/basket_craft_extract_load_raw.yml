@@ -13,6 +13,10 @@ env:
   MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }} #allows to get password info from secrets manager
   MYSQL_HOST: ${{ secrets.MYSQL_HOST }} #allows to get host info from secrets manager
   MYSQL_DB: ${{ secrets.MYSQL_DB }} #allows to get database info from secrets manager
+  PG_USER: ${{ secrets.PG_USER }} #allows to get user info from secrets manager
+  PG_PASSWORD: ${{ secrets.PG_PASSWORD }} #allows to get password info from secrets manager
+  PG_HOST: ${{ secrets.PG_HOST }} #allows to get host info from secrets manager
+  PG_DB: ${{ secrets.PG_DB }} #allows to get database info from secrets manager
 
 jobs:
   extract-load:
