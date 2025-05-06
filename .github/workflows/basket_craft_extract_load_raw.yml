@@ -36,10 +36,10 @@ jobs:
         #NOW run script
       - name: Extract and load products to raw Schema
         run: |
-          python elt/basket_craft_products_extract_load.py
+          python elt/basket_craft_products_extract_load_raw.py
 
       - name: Extract and load orders to raw Schema
         run: |
-          python elt/basket_craft_orders_extract_load.py
+          python elt/basket_craft_orders_extract_load_raw.py
           
       #continue
