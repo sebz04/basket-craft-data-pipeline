@@ -15,6 +15,8 @@ import os
 #access environment variables and interact with operating system 
 from dotenv import load_dotenv
 #load environment variables from .env file
+from sqlalchemy import text
+
 
 load_dotenv()
 
@@ -49,6 +51,12 @@ df = pd.read_sql('SELECT * FROM products', mysql_engine)
 #df
 # %%
 #Send the data to SQL
-df.to_sql('products', pg_engine, schema='raw', if_exists='replace', index=False)
+with pg_engine.connect() as connection:
+    connection.execute(text("DELETE FROM raw.products"))
+
+
+# Append the new data without dropping the tables 
+df.to_sql('products', pg_engine, schema='raw', if_exists='append', index=False)
+
 
 # %%

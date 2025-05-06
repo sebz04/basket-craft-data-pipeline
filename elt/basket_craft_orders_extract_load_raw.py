@@ -13,6 +13,7 @@ from sqlalchemy import create_engine
 import os 
 #access environment variables and interact with operating system 
 from dotenv import load_dotenv
+from sqlalchemy import text
 #load environment variables from .env file
 
 load_dotenv()
@@ -47,7 +48,11 @@ pg_engine = create_engine(pg_conn_str)
 df = pd.read_sql('SELECT * FROM orders', mysql_engine)
 #df
 # %%
-#Send the data to SQL
-df.to_sql('orders', pg_engine, schema='raw', if_exists='replace', index=False)
+#Send the data to Postgres
+with pg_engine.connect() as connection:
+    connection.execute(text("DELETE FROM raw.orders"))
 
+
+# Append the new data without dropping the tables 
+df.to_sql('orders', pg_engine, schema='raw', if_exists='append', index=False)
 # %%
