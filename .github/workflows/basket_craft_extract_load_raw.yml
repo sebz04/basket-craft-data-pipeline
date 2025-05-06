@@ -10,6 +10,9 @@ on:
 #Define environmental variables --> everytime it runs, it will check out repository, but can't see ENV since it's not in public repository
 env:
   MYSQL_USER: ${{ secrets.MYSQL_USER }} #allows to get user info from secrets manager
+  MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }} #allows to get password info from secrets manager
+  MYSQL_HOST: ${{ secrets.MYSQL_HOST }} #allows to get host info from secrets manager
+  MYSQL_DB: ${{ secrets.MYSQL_DB }} #allows to get database info from secrets manager
 
 jobs:
   extract-load:
