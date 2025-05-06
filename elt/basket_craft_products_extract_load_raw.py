@@ -6,6 +6,7 @@
 5. Write Dataframe to products table in PostGres (raw schema)
 '''
 
+
 # %%
 
 import pandas as pd
