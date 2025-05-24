@@ -1,9 +1,9 @@
 name: Run Basket Craft Extract and Load to Raw
 #name roles and when to run, also where it runs
 on:
-  schedule:
+  #schedule:
     #cron is everywhere, easier for ppl to understand how to schedule things
-    - cron: '*/15 * * * *'
+    #- cron: '*/15 * * * *'
       # every 15 minutes
   workflow_dispatch: #optional manual trigger
 
